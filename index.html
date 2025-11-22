@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Luxeria Perfumes</title>
+  <meta name="description" content="Luxeria Perfumes — fragrâncias premium. Perfumes inspirados e originais com entrega rápida. Descubra sua essência." />
+  <link rel="icon" href="#" />
+  <style>
+    :root{
+      --bg:#0b0b0b; --card:#1c1c1c; --accent:#d4af37; --muted:#a1a1a1; --glass: rgba(255,255,255,0.03);
+      --maxw:1100px;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(180deg,#0a0a0a 0%,#1a1a1a 100%);color:#fff; -webkit-font-smoothing:antialiased;}
+    .wrap{max-width:var(--maxw);margin:36px auto;padding:20px;}
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,#0f0f0f,#1a1a1a);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:18px;box-shadow:0 6px 20px rgba(0,0,0,0.6)}
+    h1.site-title{font-size:20px;margin:0}
+    nav a{color:var(--muted);text-decoration:none;margin-left:18px}
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:24px;align-items:center;margin:24px 0;padding:28px;border-radius:14px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 8px 30px rgba(2,6,23,0.6)}
+    .hero-left h2{font-size:34px;margin:0 0 8px 0;color:var(--accent)}
+    .hero-left p{color:var(--muted);margin:0 0 18px}
+    .cta{display:inline-block;background:var(--accent);color:#0b0b0b;padding:12px 18px;border-radius:10px;font-weight:600;text-decoration:none}
+    .hero-right{display:grid;gap:12px}
+    .product-card{background:var(--card);padding:14px;border-radius:12px;display:flex;gap:12px;align-items:center}
+    .thumb{width:84px;height:84px;border-radius:10px;flex:0 0 84px;background:linear-gradient(180deg,#26334a,#1b2733);display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:600}
+    .price{color:var(--accent);font-weight:700}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:18px}
+    .card{background:var(--glass);padding:16px;border-radius:12px;transition:transform .18s;cursor:pointer;border:1px solid rgba(255,255,255,0.03)}
+    .card:hover{transform:translateY(-6px)}
+    .card .img{height:180px;border-radius:8px;background:linear-gradient(180deg,#2a2a2a,#101010);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--muted);margin-bottom:12px}
+    .card h3{margin:0;font-size:16px}
+    .card p{margin:6px 0;color:var(--muted);font-size:14px}
+    .btn{display:inline-block;background:transparent;border:1px solid var(--accent);color:var(--accent);padding:8px 12px;border-radius:8px;text-decoration:none;cursor:pointer}
+    .row{display:flex;gap:12px;align-items:center}
+    footer{margin-top:30px;color:var(--muted);font-size:14px;padding:18px 0;border-top:1px dashed rgba(255,255,255,0.03)}
+    /* modal */
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.8);z-index:40}
+    .modal.open{display:flex}
+    .modal-card{width:92%;max-width:860px;background:linear-gradient(180deg,#0b0b0b,#1c1c1c);padding:20px;border-radius:12px;display:grid;grid-template-columns:1fr 320px;gap:18px}
+    .modal .big{height:340px;border-radius:10px;background:linear-gradient(180deg,#1a1a1a,#0b0b0b);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--muted)}
+    .close{position:absolute;right:26px;top:24px;background:transparent;border:0;color:#fff;font-size:22px;cursor:pointer}
+    .cart{position:relative}
+    .badge{position:absolute;top:-6px;right:-10px;background:#ff4b5c;color:#fff;padding:4px 8px;border-radius:999px;font-size:12px;font-weight:700}
+    @media (max-width:880px){
+      .hero{grid-template-columns:1fr;padding:18px}
+      .modal-card{grid-template-columns:1fr;max-width:520px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">LUX</div>
+        <div>
+          <h1 class="site-title">Luxeria Perfumes</h1>
+          <div style="color:var(--muted);font-size:13px">Perfumes Premium</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#produtos">Produtos</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#contato">Contato</a>
+        <a class="cart" id="open-cart" href="javascript:void(0)">Carrinho 🛒 <span class="badge" id="cart-count" style="display:none">0</span></a>
+      </nav>
+    </header>
+
+    <section class="hero" aria-label="Apresentação Luxeria Perfumes">
+      <div class="hero-left">
+        <h2>Luxeria Perfumes</h2>
+        <p>Fragrâncias premium que marcam presença. Perfumes inspirados e originais, com entrega rápida e embalagem elegante.</p>
+        <a class="cta" href="#produtos">Comprar agora</a>
+      </div>
+    </section>
+
+    <main>
+      <section id="produtos">
+        <h2 style="margin:6px 0 8px 0">Produtos em destaque</h2>
+        <div class="grid" id="product-grid"></div>
+      </section>
+
+      <section id="sobre" style="margin-top:28px;padding:18px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border-radius:12px">
+        <h3>Sobre a Luxeria Perfumes</h3>
+        <p style="color:var(--muted)">A Luxeria Perfumes nasceu da paixão por fragrâncias que duram. Entregamos perfumes com qualidade, embalagens elegantes e atendimento personalizado, proporcionando experiências memoráveis.</p>
+      </section>
+
+      <section id="contato" style="margin-top:18px">
+        <h3>Contato</h3>
+        <p style="color:var(--muted)">WhatsApp: <a href="https://wa.me/5511999999999" target="_blank" style="color:var(--accent);text-decoration:none">+55 (11) 99999-9999</a></p>
+        <p style="color:var(--muted)">Instagram: <a href="https://instagram.com/luxeria_perfumes" target="_blank" style="color:var(--accent);text-decoration:none">@luxeria_perfumes</a></p>
+      </section>
+    </main>
+
+    <footer>
+      Luxeria Perfumes — © <span id="year"></span> • Todos os direitos reservados.
+    </footer>
+  </div>
+
+  <!-- Carrinho -->
+  <div class="modal" id="cart-modal" aria-hidden="true">
+    <div style="width:100%;max-width:520px;padding:20px;background:linear-gradient(180deg,#0b0b0b,#1c1c1c);border-radius:12px;">
+      <button class="close" id="close-cart" style="position:relative;left:100%;">✕</button>
+      <h3>Carrinho</h3>
+      <div id="cart-items" style="margin-top:12px"></div>
+      <div style="margin-top:12px;display:flex;justify-content:space-between;align-items:center">
+        <div style="color:var(--muted)">Total:</div>
+        <div id="cart-total" style="font-weight:700"></div>
+      </div>
+      <div style="margin-top:12px;display:flex;gap:8px">
+        <button class="btn" id="checkout">Finalizar compra</button>
+        <button class="btn" id="clear-cart">Limpar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const products = [
+      {sku:'p1',name:'Velvet Oud 50ml',price:79.90,img:'VELVET',short:'Amadeirado oriental, fixação alta'},
+      {sku:'p2',name:'Lúmina 30ml',price:49.90,img:'LUMINA',short:'Floral frutal, leve para o dia'},
+      {sku:'p3',name:'Noir Intense 50ml',price:99.90,img:'NOIR',short:'Aroma intenso e marcante'},
+      {sku:'p4',name:'Amber Spice 50ml',price:89.90,img:'AMBER',short:'Oriental especiado'},
+      {sku:'p5',name:'Citrus Bloom 30ml',price:39.90,img:'CITRUS',short:'Frutas cítricas, fresco'}
+    ];
+
+    const grid = document.getElementById('product-grid');
+    const CART_KEY = 'luxeria_cart_v1';
+
+    function renderProducts(){
+      products.forEach(p=>{
+        const card = document.createElement('article');
+        card.className='card';
+        card.innerHTML = `
+          <div class="img">${p.img}</div>
+          <h3>${p.name}</h3>
+          <p>${p.short}</p>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+            <div style="font-weight:700;color:var(--accent)">R$ ${p.price.toFixed(2).replace('.',',')}</div>
+            <div style="display:flex;gap:8px">
+              <button class="btn add" data-sku="${p.sku}">Adicionar</button>
+            </div>
+          </div>`;
+        grid.appendChild(card);
+      });
+      document.querySelectorAll('.add').forEach(b=>b.addEventListener('click',e=>{
+        const sku = e.currentTarget.dataset.sku;
+        addToCart(sku,1);
+      }));
+    }
+
+    function getCart(){ return JSON.parse(localStorage.getItem(CART_KEY)) || []; }
+    function saveCart(c){ localStorage.setItem(CART_KEY,JSON.stringify(c)); updateCartBadge(); }
+    function addToCart(sku,qty){
+      const p = products.find(x=>x.sku===sku); if(!p) return;
+      const cart = getCart();
+      const item = cart.find(i=>i.sku===sku);
+      if(item){ item.qty += qty; } else { cart.push({sku:p.sku,name:p.name,price:p.price,qty:qty}); }
+      saveCart(cart);
+      alert('Adicionado ao carrinho: '+p.name);
+    }
+
+    function updateCartBadge(){
+      const cart = getCart();
+      const count = cart.reduce((s,i)=>s+i.qty,0);
+      const badge = document.getElementById('cart-count');
+      badge.style.display = count>0 ? 'inline-block' : 'none';
+      badge.textContent = count;
+    }
+
+    function renderCart(){
+      const el = document.getElementById('cart-items');
+      const cart = getCart();
+      if(cart.length===0){ el.innerHTML='<div style="color:var(--muted)">Seu carrinho está vazio.</div>'; document.getElementById('cart-total').textContent='R$ 0,00'; return; }
+      el.innerHTML=''; let total=0;
+      cart.forEach(item=>{
+        const div = document.createElement('div');
+        div.style.display='flex'; div.style.justifyContent='space-between'; div.style.alignItems='center'; div.style.marginBottom='8px';
+        div.innerHTML=`<div><div style="font-weight:700">${item.name}</div><div style="color:var(--muted);font-size:13px">Qtd: ${item.qty} × R$ ${item.price.toFixed(2).replace('.',',')}</div></div>
+        <div style="text-align:right">R$ ${(item.price*item.qty).toFixed(2).replace('.',',')}</div>`;
+        el.appendChild(div); total+=item.price*item.qty;
+      });
+      document.getElementById('cart-total').textContent='R$ '+total.toFixed(2).replace('.',',');
+    }
+
+    document.getElementById('open-cart').addEventListener('click',()=>{ renderCart(); cartModal.classList.add('open'); cartModal.setAttribute('aria-hidden','false'); });
+    document.getElementById('close-cart').addEventListener('click',()=>{ cartModal.classList.remove('open'); cartModal.setAttribute('aria-hidden','true'); });
+    document.getElementById('clear-cart').addEventListener('click',()=>{ if(confirm('Limpar carrinho?')){ localStorage.removeItem(CART_KEY); renderCart(); updateCartBadge(); } });
+    document.getElementById('checkout').addEventListener('click',()=>{
+      const cart = getCart(); if(cart.length===0){ alert('Carrinho vazio.'); return; }
+      const lines = cart.map(i=>`${i.qty}x ${i.name} - R$ ${i.price.toFixed(2).replace('.',',')}`);
+      const total = cart.reduce((s,i)=>s+i.price*i.qty,0).toFixed(2).replace('.',',');
+      const text = encodeURIComponent('Pedido Luxeria Perfumes:%0A'+lines.join('%0A')+'%0A%0ATotal: R$ '+total+'%0A%0ANome:%0AEndereço:%0AContato:');
+      const wa='https://wa.me/5511999999999?text='+text;
+      window.open(wa,'_blank');
+    });
+
+    const cartModal = document.getElementById('cart-modal');
+    document.getElementById('year').textContent=new Date().getFullYear();
+    renderProducts();
+    updateCartBadge();
+  </script>
+</body>
+</html>
